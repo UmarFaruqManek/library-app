@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Loan Management</h2>
+        <p class="text-muted small">Track and manage book borrowing across your library.</p>
+    </div>
+    <a href="/loans/add" class="btn btn-primary shadow-sm">
+        <i class="bi bi-plus-lg me-1"></i> New Loan
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light text-muted">
+                <tr>
+                    <th class="px-4">Member Name</th>
+                    <th>Book Title</th>
+                    <th>Loan Date</th>
+                    <th>Return Date</th>
+                    <th>Status</th>
+                    <th class="text-end px-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (loans.length > 0) { %>
+                    <% loans.forEach(loan => { %>
+                        <tr>
+                            <td class="px-4 fw-bold"><%= loan.member_name %></td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light p-2 rounded me-2">
+                                        <i class="bi bi-book text-muted"></i>
+                                    </div>
+                                    <%= loan.book_title %>
+                                </div>
+                            </td>
+                            <td><%= loan.loan_date ? new Date(loan.loan_date).toLocaleDateString() : 'N/A' %></td>
+                            <td><%= loan.return_date ? new Date(loan.return_date).toLocaleDateString() : '-' %></td>
+                            <td>
+                                <% if (loan.status === 'borrowed') { %>
+                                    <span class="badge bg-warning bg-opacity-10 text-warning fw-normal px-2 py-1">Borrowed</span>
+                                <% } else if (loan.status === 'returned') { %>
+                                    <span class="badge bg-success bg-opacity-10 text-success fw-normal px-2 py-1">Returned</span>
+                                <% } else { %>
+                                    <span class="badge bg-danger bg-opacity-10 text-danger fw-normal px-2 py-1">Overdue</span>
+                                <% } %>
+                            </td>
+                            <td class="text-end px-4">
+                                <button class="btn btn-sm btn-outline-secondary">Details</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="bi bi-clock-history fs-2 mb-2 d-block"></i>
+                            No loan records found.
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-3 bg-light border-top rounded-bottom">
+        <span class="text-muted small">Showing <%= loans.length %> loan records</span>
+    </div>
+</div>

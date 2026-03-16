@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Borrow a Book</h2>
+        <p class="text-muted small">Create a new loan record for a member.</p>
+    </div>
+    <a href="/loans" class="btn btn-light border shadow-sm">
+        <i class="bi bi-arrow-left me-1"></i> Back to History
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        <form action="/loans/add" method="POST">
+            <div class="row g-3">
+                <!-- Select Member -->
+                <div class="col-md-6">
+                    <label for="member_id" class="form-label fw-medium">Select Member</label>
+                    <select class="form-select" id="member_id" name="member_id" required>
+                        <option selected disabled>Choose a member...</option>
+                        <% members.forEach(member => { %>
+                            <option value="<%= member.id %>"><%= member.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <!-- Select Book -->
+                <div class="col-md-6">
+                    <label for="book_id" class="form-label fw-medium">Select Book</label>
+                    <select class="form-select" id="book_id" name="book_id" required>
+                        <option selected disabled>Choose a book...</option>
+                        <% books.forEach(book => { %>
+                            <option value="<%= book.id %>"><%= book.title %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <!-- Loan Date -->
+                <div class="col-md-6">
+                    <label for="loan_date" class="form-label fw-medium">Loan Date</label>
+                    <input type="date" class="form-control" id="loan_date" name="loan_date" value="<%= new Date().toISOString().split('T')[0] %>" required>
+                </div>
+
+                <!-- Return Date -->
+                <div class="col-md-6">
+                    <label for="return_date" class="form-label fw-medium">Expected Return Date</label>
+                    <input type="date" class="form-control" id="return_date" name="return_date" required>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="col-12 mt-4 pt-3 border-top d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                        <i class="bi bi-journal-plus me-1"></i> Create Loan
+                    </button>
+                    <a href="/loans" class="btn btn-light border px-4">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

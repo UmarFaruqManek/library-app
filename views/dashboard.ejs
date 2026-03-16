@@ -1,0 +1,132 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Dashboard</h2>
+        <p class="text-muted small mb-0">Quick overview of the library system.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Total Books Card -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-circle me-3">
+                    <i class="bi bi-book fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-0">Total Books</h6>
+                    <h3 class="fw-bold mb-0"><%= stats.totalBooks %></h3>
+                </div>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-info-circle me-1"></i> Catalog inventory
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Members Card -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3">
+                    <i class="bi bi-people fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-0">Total Members</h6>
+                    <h3 class="fw-bold mb-0"><%= stats.totalMembers %></h3>
+                </div>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-person-check-fill me-1"></i> Registered users
+            </div>
+        </div>
+    </div>
+
+    <!-- Books Borrowed Card -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-circle me-3">
+                    <i class="bi bi-journal-arrow-up fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-0">Books Borrowed</h6>
+                    <h3 class="fw-bold mb-0"><%= stats.borrowedBooks %></h3>
+                </div>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-clock-history me-1"></i> Active loans
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- Recent Loans -->
+    <div class="col-12 col-lg-8">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between">
+                <h5 class="fw-bold mb-0">Recent Activity</h5>
+                <a href="/loans" class="text-primary small text-decoration-none">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light text-muted small uppercase">
+                            <tr>
+                                <th class="px-4 py-3">Member</th>
+                                <th>Book</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (recentLoans.length > 0) { %>
+                                <% recentLoans.forEach(loan => { %>
+                                    <tr>
+                                        <td class="px-4 fw-medium"><%= loan.member_name %></td>
+                                        <td class="small"><%= loan.book_title %></td>
+                                        <td class="text-muted small"><%= new Date(loan.loan_date).toLocaleDateString() %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="3" class="text-center py-4 text-muted small">No recent activity</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 pt-4 px-4">
+                <h5 class="fw-bold mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body px-4 pb-4">
+                <div class="d-grid gap-2 mt-2">
+                    <a href="/books/add" class="btn btn-primary text-start px-3 py-2 border-0 shadow-none">
+                        <i class="bi bi-plus-lg me-2"></i> Add New Book
+                    </a>
+                    <a href="/members/add" class="btn btn-success text-start px-3 py-2 border-0 shadow-none">
+                        <i class="bi bi-person-plus me-2"></i> Register Member
+                    </a>
+                    <a href="/loans/add" class="btn btn-warning text-white text-start px-3 py-2 border-0 shadow-none">
+                        <i class="bi bi-journal-plus me-2"></i> Create Loan
+                    </a>
+                </div>
+                <hr class="my-4 opacity-10">
+                <div class="bg-light p-3 rounded">
+                    <h6 class="fw-bold small mb-2">System Status</h6>
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span>Database</span>
+                        <span class="text-success"><i class="bi bi-check-circle-fill me-1"></i> Connected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

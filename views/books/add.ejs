@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Add New Book</h2>
+        <p class="text-muted small">Enter the details of the new book to add it to the catalog.</p>
+    </div>
+    <a href="/books" class="btn btn-light border shadow-sm">
+        <i class="bi bi-arrow-left me-1"></i> Back to List
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        <form action="/books/add" method="POST">
+            <div class="row g-3">
+                <!-- Title -->
+                <div class="col-md-12">
+                    <label for="title" class="form-label fw-medium">Book Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="e.g. The Great Gatsby" required>
+                </div>
+                
+                <!-- Author -->
+                <div class="col-md-6">
+                    <label for="author" class="form-label fw-medium">Author</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="e.g. F. Scott Fitzgerald" required>
+                </div>
+
+                <!-- ISBN -->
+                <div class="col-md-6">
+                    <label for="isbn" class="form-label fw-medium">ISBN</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" placeholder="e.g. 9781234567890" required>
+                </div>
+
+                <!-- Publisher -->
+                <div class="col-md-6">
+                    <label for="publisher" class="form-label fw-medium">Publisher</label>
+                    <input type="text" class="form-control" id="publisher" name="publisher" placeholder="e.g. Scribner">
+                </div>
+
+                <!-- Year -->
+                <div class="col-md-6">
+                    <label for="year" class="form-label fw-medium">Publication Year</label>
+                    <input type="number" class="form-control" id="year" name="year" placeholder="e.g. 1925">
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-6">
+                    <label for="category" class="form-label fw-medium">Category</label>
+                    <select class="form-select" id="category" name="category">
+                        <option selected disabled>Choose a category...</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Science">Science</option>
+                        <option value="History">History</option>
+                        <option value="Self-Help">Self-Help</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Stock -->
+                <div class="col-md-6">
+                    <label for="stock" class="form-label fw-medium">Initial Stock</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="stock" name="stock" value="1" min="0" required>
+                        <span class="input-group-text">copies</span>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="col-12 mt-4 pt-3 border-top d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                        <i class="bi bi-save me-1"></i> Save Book
+                    </button>
+                    <button type="reset" class="btn btn-light border px-4">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -43,12 +43,28 @@ const loansController = {
                 } else {
                     req.flash("success", "Book successfully borrowed!");
                 }
-                res.redirect("/loans");
             });
         });
+    },
+    details: (req, res) => {
+        const { id } = req.params;
+        const query = `
+            SELECT l.*, b.title as book_title, b.author as book_author, b.isbn as book_isbn,
+                   m.name as member_name, m.email as member_email, m.phone as member_phone
+            FROM loans l
+            JOIN books b ON l.book_id = b.id
+            JOIN members m ON l.member_id = m.id
+            WHERE l.id = ?
+        `;
+        db.query(query, [id], (err, results) => {
+            if (err) throw err;
+            if (results.length === 0) {
+                req.flash("error", "Loan record not found.");
+                return res.redirect("/loans");
+            }
+            res.render("loans/details", { loan: results[0] });
+        });
     }
-
-
 };
 
 module.exports = loansController;

@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Loan Details</h2>
+        <p class="text-muted small">Comprehensive information about the borrowing record.</p>
+    </div>
+    <a href="/loans" class="btn btn-light border shadow-sm">
+        <i class="bi bi-arrow-left me-1"></i> Back to History
+    </a>
+</div>
+
+<div class="row g-4">
+    <!-- Member & Book Info -->
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6 border-end">
+                        <h6 class="text-muted small text-uppercase fw-bold mb-3">Borrower Information</h6>
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://ui-avatars.com/api/?name=<%= loan.member_name %>&background=random" class="rounded-circle me-3" width="48" height="48">
+                            <div>
+                                <h5 class="fw-bold mb-0"><%= loan.member_name %></h5>
+                                <p class="text-muted small mb-0"><%= loan.member_email %></p>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <p class="mb-1"><strong>Phone:</strong> <%= loan.member_phone || '-' %></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ps-md-4">
+                        <h6 class="text-muted small text-uppercase fw-bold mb-3">Book Information</h6>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 text-primary p-3 rounded me-3">
+                                <i class="bi bi-book fs-3"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0"><%= loan.book_title %></h5>
+                                <p class="text-muted small mb-0">by <%= loan.book_author %></p>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <p class="mb-1"><strong>ISBN:</strong> <%= loan.book_isbn %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loan Status -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+                <h6 class="text-muted small text-uppercase fw-bold mb-3">Loan Status</h6>
+                <div class="mb-4">
+                    <% if (loan.status === 'borrowed') { %>
+                        <span class="badge bg-warning bg-opacity-10 text-warning fs-6 fw-normal px-3 py-2 w-100">Borrowed</span>
+                    <% } else if (loan.status === 'returned') { %>
+                        <span class="badge bg-success bg-opacity-10 text-success fs-6 fw-normal px-3 py-2 w-100">Returned</span>
+                    <% } else { %>
+                        <span class="badge bg-danger bg-opacity-10 text-danger fs-6 fw-normal px-3 py-2 w-100">Overdue</span>
+                    <% } %>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="text-muted small d-block">Loan Date</label>
+                    <span class="fw-bold"><%= loan.loan_date ? new Date(loan.loan_date).toLocaleDateString() : 'N/A' %></span>
+                </div>
+                <div class="mb-3">
+                    <label class="text-muted small d-block">Expected Return</label>
+                    <span class="fw-bold"><%= loan.return_date ? new Date(loan.return_date).toLocaleDateString() : '-' %></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

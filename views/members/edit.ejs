@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Edit Member</h2>
+        <p class="text-muted small">Update member personal information.</p>
+    </div>
+    <a href="/members" class="btn btn-light border shadow-sm">
+        <i class="bi bi-arrow-left me-1"></i> Back to List
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        <form action="/members/update/<%= member.id %>" method="POST">
+            <div class="row g-3">
+                <!-- Name -->
+                <div class="col-md-12">
+                    <label for="name" class="form-label fw-medium">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="<%= member.name %>" required>
+                </div>
+                
+                <!-- Email -->
+                <div class="col-md-6">
+                    <label for="email" class="form-label fw-medium">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<%= member.email %>" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6">
+                    <label for="phone" class="form-label fw-medium">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="<%= member.phone %>">
+                </div>
+
+                <!-- Address -->
+                <div class="col-md-12">
+                    <label for="address" class="form-label fw-medium">Address</label>
+                    <textarea class="form-control" id="address" name="address" rows="3"><%= member.address %></textarea>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="col-12 mt-4 pt-3 border-top d-flex gap-2">
+                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                        <i class="bi bi-save me-1"></i> Update Member
+                    </button>
+                    <a href="/members" class="btn btn-light border px-4">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
